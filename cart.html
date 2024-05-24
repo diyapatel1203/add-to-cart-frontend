@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="normalize.css" />
+  <link rel="stylesheet" href="skeleton.css" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Shark Tank India</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+    integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div id="data-list-wrapper"></div>
+</body>
+
+</html>
+
+<script>
+  function FetchData() {
+    fetch("https://add-to-cart-backend-1-pf9e.onrender.com/cart")
+      .then((res) => res.json())
+      .then((data) => {
+        CardList(data)
+        ProductData = data
+      })
+      .catch((err) => console.log(err))
+  }
+  FetchData()
+
+  function CardList(data) {
+    const store = data.map((el) => SingleCard(el.image, el.title, el.price, el.founder, el.category, el.id, el.description))
+    document.getElementById("data-list-wrapper").innerHTML = store.join("")
+  }
+
+  function SingleCard(image, title, price, founder, category, id, description) {
+    let Card = `
+    <a href="description.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&founder=${encodeURIComponent(founder)}&category=${encodeURIComponent(category)}&price=${encodeURIComponent(price)}&id=${encodeURIComponent(id)}&description=${encodeURIComponent(description)}">
+    <div class="card" data-id="${id}">
+    <div class="card-img">
+      <img src="${image}" alt="">
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">Title :${title}</h4>
+      <p class="card-founder">Founder :${founder}</p>
+      <p class="card-category">Category :${category}</p>
+      <p class="card-price">Price :${price}</p>
+      <a href="" data-id="${id}" class="card-link">Edit</a>
+      <button data-id="${id}" class="card-button">Delete</button>
+    </div>
+  </div>
+  </a>
+    `
+
+    return Card;
+  }
+
+
+  document.addEventListener("click",(e)=>{
+        if(e.target.classList.contains("card-button"))
+        {
+            DeleteData(e.target.dataset.id);
+        }
+})
+
+function DeleteData(id)
+{
+    fetch(`https://add-to-cart-backend-1-pf9e.onrender.com/cart/${id}`, {
+    method: 'DELETE',
+    })
+
+    .then((res)=>res.json())
+    .then((data)=>{
+        alert("Deleted..")
+        console.log(data)
+    })
+    .catch((err)=>console.log(err))
+}
+</script>
