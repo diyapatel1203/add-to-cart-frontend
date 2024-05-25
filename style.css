@@ -63,7 +63,7 @@ a:hover
   flex-basis: 100%;
   gap: 4%;
 }
-.card-link 
+/* .card-link 
 {
   text-decoration: none;
   background-color: black;
@@ -71,7 +71,7 @@ a:hover
   padding: 10px 20px;
   font-size: 15px;
   border-radius: 5px;
-}
+} */
 
 .card:not(:last-child) {
   margin-bottom: 16px;
@@ -126,11 +126,11 @@ a:hover
   object-fit: cover !important;
 }
 
-.card__link  {
-  font-family: "verdana", "sans-serif";
+/* .card__link  { */
+  /* font-family: "verdana", "sans-serif";
   font-size: 15px;
   color: #1c1c1c;
-}
+} */
 
 @media (min-width: 768px) {
   .card {

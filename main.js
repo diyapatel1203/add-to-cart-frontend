@@ -58,21 +58,23 @@ function CardList(data) {
 
 function SingleCard(image, title, price, founder, category, id, description) {
     let Card = `
-    <a href="description.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&founder=${encodeURIComponent(founder)}&category=${encodeURIComponent(category)}&price=${encodeURIComponent(price)}&id=${encodeURIComponent(id)}&description=${encodeURIComponent(description)}">
+    
     <div class="card" data-id="${id}">
+    <a href="description.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&founder=${encodeURIComponent(founder)}&category=${encodeURIComponent(category)}&price=${encodeURIComponent(price)}&id=${encodeURIComponent(id)}&description=${encodeURIComponent(description)}">
     <div class="card-img">
       <img src="${image}" alt="">
     </div>
+    </a>
     <div class="card-body">
       <h4 class="card-title">Title :${title}</h4>
       <p class="card-founder">Founder :${founder}</p>
       <p class="card-category">Category :${category}</p>
       <p class="card-price">Price :${price}</p>
-      <a href="" data-id="${id}" class="card-link">Edit</a>
+      <button  data-id="${id}" class="card-link">Edit</button>
       <button data-id="${id}" class="card-button">Delete</button>
     </div>
   </div>
-  </a>
+ 
     `
 
     return Card;
@@ -176,7 +178,7 @@ sortZtoABtn.addEventListener("click", () => {
 // Update All data
 
 document.addEventListener("click", (e) => {
-    // e.preventDefault()                                                                                                       
+    //  e.preventDefault()                                                                                                       
     if (e.target.classList.contains("card-link")) 
     {
         let id = (e.target.dataset.id)
